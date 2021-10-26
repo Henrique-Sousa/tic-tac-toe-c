@@ -41,7 +41,18 @@ int main() {
       }
     }
     SDL_RenderClear(rend);
-    SDL_SetRenderDrawColor(rend, 255, 0, 0, 255);
+    SDL_SetRenderDrawColor(rend, 70, 70, 70, 255);
+    SDL_RenderClear(rend);
+    SDL_SetRenderDrawColor(rend, 150, 150, 150, 255);
+    SDL_RenderDrawLine(rend, 0, 0, 200, 200);
     SDL_RenderPresent(rend);
   }
+  if (rend) {
+      SDL_DestroyRenderer(rend);
+  }
+  if (win) {
+      SDL_DestroyWindow(win);
+  } 
+  SDL_Quit();
+  return 0;
 }

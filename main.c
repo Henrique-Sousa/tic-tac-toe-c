@@ -1,18 +1,44 @@
+#include <stdlib.h>
 #include <SDL2/SDL.h>
 
 #define WINDOW_WIDTH 640
 #define WINDOW_HEIGHT 480
+#define N 3
+#define CELL_WIDTH WINDOW_WIDTH / N
+#define CELL_HEIGHT WINDOW_HEIGHT / N 
 
 void sdl(int code) {
   if (code < 0) {
     printf("%s\n", SDL_GetError());
+    abort();
   }
 }
 
 void sdl_created(void* ptr) {
   if (ptr == NULL) {
     printf("%s\n", SDL_GetError());
+    abort();
   }
+}
+
+void drawGrid(SDL_Renderer* rend) {
+  SDL_RenderClear(rend);
+  SDL_SetRenderDrawColor(rend, 150, 150, 150, 255);
+  // draw rows
+  for (int i = 1; i < N; i++) {
+    SDL_RenderDrawLine(rend,
+      0, i * CELL_HEIGHT,
+      WINDOW_WIDTH, i * CELL_HEIGHT
+    );
+  }
+  // draw columns
+  for (int i = 1; i < N; i++) {
+    SDL_RenderDrawLine(rend,
+      i * CELL_WIDTH, 0,
+      i * CELL_WIDTH, WINDOW_HEIGHT
+    );
+  }
+  SDL_RenderPresent(rend);
 }
 
 int main() {
@@ -42,10 +68,7 @@ int main() {
     }
     SDL_RenderClear(rend);
     SDL_SetRenderDrawColor(rend, 70, 70, 70, 255);
-    SDL_RenderClear(rend);
-    SDL_SetRenderDrawColor(rend, 150, 150, 150, 255);
-    SDL_RenderDrawLine(rend, 0, 0, 200, 200);
-    SDL_RenderPresent(rend);
+    drawGrid(rend);
   }
   if (rend) {
       SDL_DestroyRenderer(rend);

@@ -1,6 +1,6 @@
 CC = gcc
-CFLAGS = -Wall
-LDFLAGS = -lSDL2
+CFLAGS = -g -Wall
+LDFLAGS = -g -lSDL2
 
 game: main.o
 	$(CC) -o game $^ $(LDFLAGS)

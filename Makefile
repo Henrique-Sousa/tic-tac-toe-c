@@ -5,7 +5,7 @@ LDFLAGS = -g -lSDL2
 game: main.o
 	$(CC) -o game $^ $(LDFLAGS)
 
-*.o: *.c
+%.o: %.c
 	$(CC) -c $^ -o $@ $(CFLAGS)
 
 .PHONY: run

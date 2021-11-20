@@ -2,6 +2,9 @@ CC = gcc
 CFLAGS = -g -Wall
 LDFLAGS = -g -lSDL2
 
+.PHONY: all
+all: clean game run
+
 game: main.o
 	$(CC) -o game $^ $(LDFLAGS)
 

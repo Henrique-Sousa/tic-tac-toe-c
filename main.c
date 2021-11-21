@@ -10,21 +10,24 @@
 
 enum Player { _, X, O };
 
-void sdl(int code) {
+void sdl(int code)
+{
   if (code < 0) {
     printf("%s\n", SDL_GetError());
     abort();
   }
 }
 
-void sdl_created(void* ptr) {
+void sdl_created(void* ptr)
+{
   if (ptr == NULL) {
     printf("%s\n", SDL_GetError());
     abort();
   }
 }
 
-void drawGrid(SDL_Renderer* rend) {
+void drawGrid(SDL_Renderer* rend)
+{
   SDL_SetRenderDrawColor(rend, 150, 150, 150, 255);
   // draw rows
   for (int i = 1; i < N; i++) {
@@ -42,7 +45,8 @@ void drawGrid(SDL_Renderer* rend) {
   }
 }
 
-void drawX(SDL_Renderer* rend, int i, int j) {
+void drawX(SDL_Renderer* rend, int i, int j)
+{
   SDL_SetRenderDrawColor(rend, 255, 0, 0, 255);
   SDL_RenderDrawLine(rend,
     j * CELL_WIDTH, i * CELL_HEIGHT,
@@ -54,7 +58,8 @@ void drawX(SDL_Renderer* rend, int i, int j) {
   );
 }
 
-void drawO(SDL_Renderer* rend, int i, int j) {
+void drawO(SDL_Renderer* rend, int i, int j)
+{
   SDL_SetRenderDrawColor(rend, 0, 0, 255, 255);
   SDL_RenderDrawLine(rend,
     j * CELL_WIDTH, i * CELL_HEIGHT,
@@ -66,7 +71,8 @@ void drawO(SDL_Renderer* rend, int i, int j) {
   );
 } 
 
-void drawBoard(SDL_Renderer* rend, int board[N][N]) {
+void drawBoard(SDL_Renderer* rend, int board[N][N])
+{
   drawGrid(rend);
   for (int i = 0; i < N; i++) {
     for (int j = 0; j < N; j++) {
@@ -80,7 +86,8 @@ void drawBoard(SDL_Renderer* rend, int board[N][N]) {
   }
 }
 
-int makeMove(enum Player player, int board[N][N], int x, int y) {
+int makeMove(enum Player player, int board[N][N], int x, int y)
+{
   int i = y / CELL_HEIGHT;
   int j = x / CELL_WIDTH;
   if (board[i][j] == _) {
@@ -90,7 +97,8 @@ int makeMove(enum Player player, int board[N][N], int x, int y) {
   return 0;
 }
 
-void switchPlayer(enum Player* player) {
+void switchPlayer(enum Player* player)
+{
   if (*player == X) {
     *player = O;
   } else if (*player == O) {
@@ -98,7 +106,8 @@ void switchPlayer(enum Player* player) {
   }
 }
 
-int checkWinner(int board[N][N]) {
+int checkWinner(int board[N][N])
+{
   enum Player player; 
   // verify rows
   for (int i = 0; i < N; i++) {
@@ -154,8 +163,8 @@ int checkWinner(int board[N][N]) {
   return 0;
 }
 
-int main() {
-
+int main()
+{
   int board[N][N] = {
     {_, _, _},
     {_, _, _},
